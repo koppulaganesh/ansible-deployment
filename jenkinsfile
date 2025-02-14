@@ -1,0 +1,17 @@
+pipeline {
+    agent any
+    stages {
+        stage('Clone Repository') {
+            steps {
+                git branch: 'main', url: 'https://github.com/koppulaganesh/ansible-deployment.git'
+            }
+        }
+        stage('Run Ansible Playbook') {
+            steps {
+                sh '''
+                ansible-playbook -i inventory.ini first-playbook.yaml
+                '''
+            }
+        }
+    }
+}
